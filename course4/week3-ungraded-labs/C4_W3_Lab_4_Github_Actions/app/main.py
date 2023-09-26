@@ -1,4 +1,5 @@
 import pickle
+import joblib
 import numpy as np
 from typing import List
 from fastapi import FastAPI
@@ -10,7 +11,13 @@ app = FastAPI(title="Predicting Wine Class with batching")
 
 # Open classifier in global scope
 with open("models/wine.pkl", "rb") as file:
-    clf = pickle.load(file)
+    # clf = pickle.load(file)
+
+    # used joblib in this version. pickle was incompatible for some reasons
+    clf = joblib.load(file)
+
+
+
 
 
 class Wine(BaseModel):
